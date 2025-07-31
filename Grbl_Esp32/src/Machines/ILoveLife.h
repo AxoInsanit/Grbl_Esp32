@@ -138,7 +138,7 @@
 #endif
 
 #ifdef ILOVELIFE_4AXIS_WITH_PROBE_FLOOD
-#define MACHINE_NAME            "AnoleX"
+#define MACHINE_NAME            "AnoleX - Axo"
 
 #define X_STEP_PIN              GPIO_NUM_13
 #define X_DIRECTION_PIN         GPIO_NUM_15
@@ -169,6 +169,9 @@
 #define PROBE_PIN               GPIO_NUM_12  // labeled Probe
 
 #define COOLANT_MIST_PIN GPIO_NUM_22
+
+#define LIMITS_TWO_SWITCHES_ON_AXES
+
 #endif
 
 #ifdef ILOVELIFE_4AXIS_WITH_PROBE_FLOOD_NEW
