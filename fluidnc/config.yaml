@@ -1,188 +1,172 @@
 board: PiBotV49P
-name: _XYZABC_Factory_Test
+name: Axolex 3030
 stepping:
   engine: I2S_STREAM
-  idle_ms: 254
+  idle_ms: 255
   pulse_us: 4
   dir_delay_us: 1
   disable_delay_us: 0
-
 axes:
   shared_stepper_disable_pin: NO_PIN
+  homing_runs: 2
   x:
     steps_per_mm: 800.000
-    max_rate_mm_per_min: 5000.000
-    acceleration_mm_per_sec2: 100.000
-    max_travel_mm: 300.000
-    soft_limits: false
+    max_rate_mm_per_min: 2000.000
+    acceleration_mm_per_sec2: 150.000
+    max_travel_mm: 285.000
+    #soft_limits: true
     homing:
       cycle: 2
+      mpos_mm: 0
       positive_direction: false
-      mpos_mm: 150.000
-      feed_mm_per_min: 100.000
-      seek_mm_per_min: 200.000
+      seek_mm_per_min: 800.000
+      feed_mm_per_min: 25.000
       settle_ms: 500
-      seek_scaler: 1.100
-      feed_scaler: 1.100
-
+      #seek_scaler: 1.100
+      #feed_scaler: 1.100
     motor0:
-      limit_neg_pin: gpio.35:low
+      limit_neg_pin: NO_PIN
       limit_pos_pin: NO_PIN
-      limit_all_pin: NO_PIN
-      hard_limits: false
+      limit_all_pin: gpio.33:low
       pulloff_mm: 1.000
-      standard_stepper:
+      #hard_limits: true
+      stepstick:
+        disable_pin: I2SO.0
         step_pin: I2SO.2
         direction_pin: I2SO.1
-        disable_pin: I2SO.0:low
-        
-##### standard_stepper MODEL can use for extend driver output 
-##### for example: plug on the capnut H4, 
-##### the output signal from the TB4-X IS "EN STP DIR GND" to driver
-#####// for some extend driver need ":low" the en signal
-####///direction_pin is used to control the direction. You can invert the direction by changing the active state attribute (:high or :low)
-        
+        ms3_pin: I2SO.3:high        
   y:
     steps_per_mm: 800.000
-    max_rate_mm_per_min: 5000.000
-    acceleration_mm_per_sec2: 100.000
-    max_travel_mm: 300.000
-    soft_limits: false
+    max_rate_mm_per_min: 2000.000
+    acceleration_mm_per_sec2: 150.000
+    max_travel_mm: 290.000
+    #soft_limits: true
     homing:
       cycle: 2
+      mpos_mm: 0
       positive_direction: true
-      mpos_mm: 150.000
-      feed_mm_per_min: 100.000
-      seek_mm_per_min: 200.000
+      seek_mm_per_min: 800.000
+      feed_mm_per_min: 25.000
       settle_ms: 500
-      seek_scaler: 1.100
-      feed_scaler: 1.100
-
+      #seek_scaler: 1.100
+      #feed_scaler: 1.100
     motor0:
-      limit_neg_pin: gpio.34:low
+      limit_neg_pin: NO_PIN
       limit_pos_pin: NO_PIN
-      limit_all_pin: NO_PIN
-      hard_limits: false
+      limit_all_pin: gpio.32:low
       pulloff_mm: 1.000
+      #hard_limits: true
       stepstick:
+        disable_pin: I2SO.7
         step_pin: I2SO.5
         direction_pin: I2SO.4
-        disable_pin: I2SO.7
-        ms3_pin: I2SO.6:low
-        
-##### stepstick MODEL can use for onboard driver output,
-##### for example: A4988 MS1 MS2 can be set in the plugnut, and the ms3 can set in this yaml file such as "ms3_pin: I2SO.6:low"
-##### notice: don't plug the capnut when use this model
-##### the output signal from the TB4-Y IS "2B 2A 1A 1B"
-
-
+        ms3_pin: I2SO.6:high
   z:
     steps_per_mm: 800.000
-    max_rate_mm_per_min: 5000.000
-    acceleration_mm_per_sec2: 100.000
-    max_travel_mm: 300.000
-    soft_limits: false
+    max_rate_mm_per_min: 2000.000
+    acceleration_mm_per_sec2: 150.000
+    max_travel_mm: 68.000
+    #soft_limits: true
     homing:
       cycle: 1
       positive_direction: true
-      mpos_mm: 150.000
-      feed_mm_per_min: 100.000
+      mpos_mm: 0
       seek_mm_per_min: 800.000
+      feed_mm_per_min: 25.000
       settle_ms: 500
-      seek_scaler: 1.100
-      feed_scaler: 1.100
-
+      #seek_scaler: 1.100
+      #feed_scaler: 1.100
     motor0:
-      limit_neg_pin: gpio.39:low
+      limit_neg_pin: NO_PIN
       limit_pos_pin: NO_PIN
-      limit_all_pin: NO_PIN
-      hard_limits: false
+      limit_all_pin: gpio.35:low
+      #hard_limits: true
       pulloff_mm: 1.000
       stepstick:
+        disable_pin: I2SO.8
         step_pin: I2SO.10
         direction_pin: I2SO.9
-        disable_pin: I2SO.8
-        ms3_pin: I2SO.11:low
-  a:
-    steps_per_mm: 53.400
-    max_rate_mm_per_min: 5000.000
-    acceleration_mm_per_sec2: 100.000
-    max_travel_mm: 960.000
-    soft_limits: false
-    homing:
-      cycle: 2
-      positive_direction: false
-      mpos_mm: 150.000
-      feed_mm_per_min: 100.000
-      seek_mm_per_min: 200.000
-      settle_ms: 500
-      seek_scaler: 1.100
-      feed_scaler: 1.100
+        ms3_pin: I2SO.11:high
+  # a:
+  #   steps_per_mm: 53.400
+  #   max_rate_mm_per_min: 5000.000
+  #   acceleration_mm_per_sec2: 100.000
+  #   max_travel_mm: 960.000
+  #   soft_limits: false
+  #   homing:
+  #     cycle: 2
+  #     positive_direction: false
+  #     mpos_mm: 150.000
+  #     feed_mm_per_min: 100.000
+  #     seek_mm_per_min: 200.000
+  #     settle_ms: 500
+  #     seek_scaler: 1.100
+  #     feed_scaler: 1.100
 
-    motor0:
-      limit_neg_pin: gpio.36:low
-      limit_pos_pin: NO_PIN
-      limit_all_pin: NO_PIN
-      hard_limits: false
-      pulloff_mm: 3.000
-      standard_stepper:
-        step_pin: I2SO.13
-        direction_pin: I2SO.12
-        disable_pin: I2SO.15
+  #   motor0:
+  #     limit_neg_pin: gpio.36:low
+  #     limit_pos_pin: NO_PIN
+  #     limit_all_pin: NO_PIN
+  #     hard_limits: false
+  #     pulloff_mm: 3.000
+  #     standard_stepper:
+  #       step_pin: I2SO.13
+  #       direction_pin: I2SO.12
+  #       disable_pin: I2SO.15
 
-  b:
-    steps_per_mm: 808.000
-    max_rate_mm_per_min: 5000.000
-    acceleration_mm_per_sec2: 100.000
-    max_travel_mm: 200.000
-    soft_limits: false
-    homing:
-      cycle: 1
-      positive_direction: false
-      mpos_mm: 150.000
-      feed_mm_per_min: 100.000
-      seek_mm_per_min: 800.000
-      settle_ms: 500
-      seek_scaler: 1.100
-      feed_scaler: 1.100
+  # b:
+  #   steps_per_mm: 808.000
+  #   max_rate_mm_per_min: 5000.000
+  #   acceleration_mm_per_sec2: 100.000
+  #   max_travel_mm: 200.000
+  #   soft_limits: false
+  #   homing:
+  #     cycle: 1
+  #     positive_direction: false
+  #     mpos_mm: 150.000
+  #     feed_mm_per_min: 100.000
+  #     seek_mm_per_min: 800.000
+  #     settle_ms: 500
+  #     seek_scaler: 1.100
+  #     feed_scaler: 1.100
 
-    motor0:
-      limit_neg_pin: NO_PIN
-      limit_pos_pin: NO_PIN
-      limit_all_pin: NO_PIN
-      hard_limits: false
-      pulloff_mm: 3.000
-      standard_stepper:
-        step_pin: I2SO.18
-        direction_pin: I2SO.17
-        disable_pin: I2SO.16
+  #   motor0:
+  #     limit_neg_pin: NO_PIN
+  #     limit_pos_pin: NO_PIN
+  #     limit_all_pin: NO_PIN
+  #     hard_limits: false
+  #     pulloff_mm: 3.000
+  #     standard_stepper:
+  #       step_pin: I2SO.18
+  #       direction_pin: I2SO.17
+  #       disable_pin: I2SO.16
 
-  c:
-    steps_per_mm: 808.000
-    max_rate_mm_per_min: 5000.000
-    acceleration_mm_per_sec2: 100.000
-    max_travel_mm: 200.000
-    soft_limits: false
-    homing:
-      cycle: 1
-      positive_direction: false
-      mpos_mm: 150.000
-      feed_mm_per_min: 100.000
-      seek_mm_per_min: 800.000
-      settle_ms: 500
-      seek_scaler: 1.100
-      feed_scaler: 1.100
+  # c:
+  #   steps_per_mm: 808.000
+  #   max_rate_mm_per_min: 5000.000
+  #   acceleration_mm_per_sec2: 100.000
+  #   max_travel_mm: 200.000
+  #   soft_limits: false
+  #   homing:
+  #     cycle: 1
+  #     positive_direction: false
+  #     mpos_mm: 150.000
+  #     feed_mm_per_min: 100.000
+  #     seek_mm_per_min: 800.000
+  #     settle_ms: 500
+  #     seek_scaler: 1.100
+  #     feed_scaler: 1.100
 
-    motor0:
-      limit_neg_pin: NO_PIN
-      limit_pos_pin: NO_PIN
-      limit_all_pin: NO_PIN
-      hard_limits: false
-      pulloff_mm: 3.000
-      standard_stepper:
-        step_pin: I2SO.21
-        direction_pin: I2SO.20
-        disable_pin: I2SO.23
+  #   motor0:
+  #     limit_neg_pin: NO_PIN
+  #     limit_pos_pin: NO_PIN
+  #     limit_all_pin: NO_PIN
+  #     hard_limits: false
+  #     pulloff_mm: 3.000
+  #     standard_stepper:
+  #       step_pin: I2SO.21
+  #       direction_pin: I2SO.20
+  #       disable_pin: I2SO.23
 
 
 probe:
@@ -239,46 +223,46 @@ relay:
   speed_map: 0=0.000% 0=100.000% 1=100.000%
   off_on_alarm: false
 
-# Begin PWM  
-pwm:
-  pwm_hz: 5000
-  direction_pin: NO_PIN
-  output_pin: gpio.4
-  enable_pin: NO_PIN
-  disable_with_s0: false
-  s0_with_disable: true
-  spinup_ms: 0
-  spindown_ms: 0
-  tool_num: 1
-  speed_map: 0=0.000% 10000=100.000%
-  off_on_alarm: false
+# # Begin PWM  
+# pwm:
+#   pwm_hz: 5000
+#   direction_pin: NO_PIN
+#   output_pin: gpio.4
+#   enable_pin: NO_PIN
+#   disable_with_s0: false
+#   s0_with_disable: true
+#   spinup_ms: 0
+#   spindown_ms: 0
+#   tool_num: 1
+#   speed_map: 0=0.000% 10000=100.000%
+#   off_on_alarm: false
   
-# Begin Laser 
-Laser:
-  pwm_hz: 5000
-  output_pin: gpio.12
-  enable_pin: NO_PIN
-  disable_with_s0: false
-  s0_with_disable: true
-  tool_num: 2
-  speed_map: 0=0.000% 255=100.000%
-  off_on_alarm: true
+# # Begin Laser 
+# Laser:
+#   pwm_hz: 5000
+#   output_pin: gpio.12
+#   enable_pin: NO_PIN
+#   disable_with_s0: false
+#   s0_with_disable: true
+#   tool_num: 2
+#   speed_map: 0=0.000% 255=100.000%
+#   off_on_alarm: true
 
-# Begin 10V
-10V:
-  forward_pin: NO_PIN
-  reverse_pin: NO_PIN
-  pwm_hz: 5000
-  output_pin: gpio.13
-  enable_pin: NO_PIN
-  direction_pin: NO_PIN
-  disable_with_s0: false
-  s0_with_disable: true
-  spinup_ms: 0
-  spindown_ms: 0
-  tool_num: 3
-  speed_map: 0=0.000% 1000=0.000% 24000=100.000%
-  off_on_alarm: false
+# # Begin 10V
+# 10V:
+#   forward_pin: NO_PIN
+#   reverse_pin: NO_PIN
+#   pwm_hz: 5000
+#   output_pin: gpio.13
+#   enable_pin: NO_PIN
+#   direction_pin: NO_PIN
+#   disable_with_s0: false
+#   s0_with_disable: true
+#   spinup_ms: 0
+#   spindown_ms: 0
+#   tool_num: 3
+#   speed_map: 0=0.000% 1000=0.000% 24000=100.000%
+#   off_on_alarm: false
   
 # Begin YL620 RS485
 uart1:
@@ -288,12 +272,12 @@ uart1:
   baud: 9600
   mode: 8N1
 
-YL620:
-  uart_num: 1
-  modbus_id: 1
-  tool_num: 4
-  speed_map: 0=0% 0=25% 6000=25% 24000=100%
-  off_on_alarm: false
+# YL620:
+#   uart_num: 1
+#   modbus_id: 1
+#   tool_num: 4
+#   speed_map: 0=0% 0=25% 6000=25% 24000=100%
+#   off_on_alarm: false
 
 
 ################################################################################################################################
