@@ -168,13 +168,6 @@ axes:
   #       direction_pin: I2SO.20
   #       disable_pin: I2SO.23
 
-
-probe:
-  pin: gpio.2:low:pu
-  toolsetter_pin: NO_PIN
-  check_mode_start: true
-  hard_stop: false
-
 ########//gpio.2 and gpio.26 need :pu when use for input
 
 i2so:
@@ -198,118 +191,85 @@ start:
   must_home: false
 
 
-# Begin OLED
-i2c0:
-   sda_pin: gpio.27
-   scl_pin: gpio.25
+# # Begin OLED
+# i2c0:
+#    sda_pin: gpio.27
+#    scl_pin: gpio.25
 
-oled:
-   i2c_num: 0
-   i2c_address: 60
-   width: 128
-   height: 64
-   radio_delay_ms: 1000
+# oled:
+#    i2c_num: 0
+#    i2c_address: 60
+#    width: 128
+#    height: 64
+#    radio_delay_ms: 1000
 
-# Begin relay
-relay:
-  direction_pin: NO_PIN
-  output_pin: gpio.26
-  enable_pin: NO_PIN
-  disable_with_s0: false
-  s0_with_disable: true
-  spinup_ms: 0
-  spindown_ms: 0
-  tool_num: 0
-  speed_map: 0=0.000% 0=100.000% 1=100.000%
-  off_on_alarm: false
-
-# # Begin PWM  
-# pwm:
-#   pwm_hz: 5000
-#   direction_pin: NO_PIN
-#   output_pin: gpio.4
-#   enable_pin: NO_PIN
-#   disable_with_s0: false
-#   s0_with_disable: true
-#   spinup_ms: 0
-#   spindown_ms: 0
-#   tool_num: 1
-#   speed_map: 0=0.000% 10000=100.000%
-#   off_on_alarm: false
-  
-# # Begin Laser 
-# Laser:
-#   pwm_hz: 5000
-#   output_pin: gpio.12
-#   enable_pin: NO_PIN
-#   disable_with_s0: false
-#   s0_with_disable: true
-#   tool_num: 2
-#   speed_map: 0=0.000% 255=100.000%
-#   off_on_alarm: true
-
-# # Begin 10V
-# 10V:
-#   forward_pin: NO_PIN
-#   reverse_pin: NO_PIN
-#   pwm_hz: 5000
-#   output_pin: gpio.13
-#   enable_pin: NO_PIN
-#   direction_pin: NO_PIN
-#   disable_with_s0: false
-#   s0_with_disable: true
-#   spinup_ms: 0
-#   spindown_ms: 0
-#   tool_num: 3
-#   speed_map: 0=0.000% 1000=0.000% 24000=100.000%
-#   off_on_alarm: false
-  
-# Begin YL620 RS485
+## FluidPendant
 uart1:
+  #Yellow 25, White 27
+  txd_pin: gpio.27
+  rxd_pin: gpio.25
+  rts_pin: NO_PIN
+  cts_pin: NO_PIN
+  baud: 1000000
+  mode: 8N1
+uart_channel1:
+ report_interval_ms: 75
+ uart_num: 1
+
+# # Begin relay
+# relay:
+#   direction_pin: NO_PIN
+#   output_pin: I2SO.20
+#   enable_pin: NO_PIN
+#   disable_with_s0: false
+#   s0_with_disable: true
+#   spinup_ms: 0
+#   spindown_ms: 0
+#   tool_num: 0
+#   speed_map: 0=0.000% 0=100.000% 1=100.000%
+#   off_on_alarm: false
+
+# Begin H100 RS485
+uart2:
   txd_pin: gpio.15
   rxd_pin: gpio.16
   rts_pin: gpio.14
   baud: 9600
   mode: 8N1
 
-# YL620:
-#   uart_num: 1
-#   modbus_id: 1
-#   tool_num: 4
-#   speed_map: 0=0% 0=25% 6000=25% 24000=100%
-#   off_on_alarm: false
+H100:
+  uart_num: 2
+  modbus_id: 1
+  tool_num: 0
+  #speed_map: 0=0% 0=25% 6000=25% 24000=100%
+  off_on_alarm: true
+
+coolant:
+  flood_pin: I2SO.23
+  mist_pin: I2SO.21
+  delay_ms: 0
+
+probe:
+  pin: gpio.2:low:pu
+  toolsetter_pin: NO_PIN
+  check_mode_start: true
+  hard_stop: false
+
+control:
+  safety_door_pin: NO_PIN
+  reset_pin: NO_PIN
+  feed_hold_pin: NO_PIN
+  cycle_start_pin: NO_PIN
+  macro0_pin: NO_PIN
+  macro1_pin: NO_PIN
+  macro2_pin: NO_PIN
+  macro3_pin: NO_PIN
+  fault_pin: gpio.34
+  estop_pin: gpio.2
+  homing_button_pin: NO_PIN
 
 
 ################################################################################################################################
-
-# Begin Huanyang RS485
-#uart1:
-  #txd_pin: gpio.15
-  #rxd_pin: gpio.16
-  #rts_pin: gpio.14
-  #baud: 9600
-  #mode: 8N1
-
-#Huanyang:
-  #uart_num: 1
-  #modbus_id: 1
-  #tool_num: 0
-  #speed_map: 0=0% 0=25% 6000=25% 24000=100%
-  #off_on_alarm: false
-
-# #begin PWM
-# pwm:
-  # pwm_hz: 5000
-  # direction_pin: NO_PIN
-  # output_pin: gpio.13
-  # enable_pin: gpio.14
-  # disable_with_s0: false
-  # s0_with_disable: true
-  # spinup_ms: 0
-  # spindown_ms: 0
-  # tool_num: 0
-  # speed_map: 0=0.000% 10000=100.000%
-  # off_on_alarm: false
 
 # #begin Laser
 # Laser:
@@ -321,40 +281,23 @@ uart1:
   # tool_num: 1
   # speed_map: 0=0.000% 255=100.000%
   # off_on_alarm: true
+# Laser:
+#   pwm_hz: 5000
+#   output_pin: gpio.12
+#   enable_pin: NO_PIN
+#   disable_with_s0: false
+#   s0_with_disable: true
+#   tool_num: 2
+#   speed_map: 0=0.000% 255=100.000%
+#   off_on_alarm: true
 
-# #begin 10V
-# 10V:
-  # forward_pin: gpio.15
-  # reverse_pin: gpio.14
-  # pwm_hz: 5000
-  # output_pin: gpio.13
-  # enable_pin: NO_PIN
-  # direction_pin: NO_PIN
-  # disable_with_s0: false
-  # s0_with_disable: true
-  # spinup_ms: 0
-  # spindown_ms: 0
-  # tool_num: 0
-  # speed_map: 0=0.000% 1000=0.000% 24000=100.000%
-  # off_on_alarm: false
 
 # Using MOSFETs (Check Spindle Pin Usage)
 # coolant:
   # flood_pin: gpio.12
   # mist_pin: gpio.4
   # delay_ms: 0
-  
-# Begin YL620 RS485
-#uart1:
-  #txd_pin: gpio.15
-  #rxd_pin: gpio.16
-  #rts_pin: gpio.14
-  #baud: 9600
-  #mode: 8N1
 
-#YL620:
-  #uart_num: 1
-  #modbus_id: 1
-  #tool_num: 0
-  #speed_map: 0=0% 0=25% 6000=25% 24000=100%
-  #off_on_alarm: false
+
+  
+
