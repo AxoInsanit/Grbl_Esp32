@@ -251,6 +251,7 @@ coolant:
 
 probe:
   pin: gpio.2:low:pu
+  #toolsetter_pin: gpio.26:low:pu
   toolsetter_pin: NO_PIN
   check_mode_start: true
   hard_stop: false
@@ -259,13 +260,14 @@ control:
   safety_door_pin: NO_PIN
   reset_pin: NO_PIN
   feed_hold_pin: NO_PIN
-  cycle_start_pin: NO_PIN
+  cycle_start_pin: gpio.39:low
   macro0_pin: NO_PIN
   macro1_pin: NO_PIN
   macro2_pin: NO_PIN
   macro3_pin: NO_PIN
-  fault_pin: gpio.34
-  estop_pin: gpio.2
+  #fault_pin: gpio.36:low
+  fault_pin: NO_PIN
+  estop_pin: gpio.34:low
   homing_button_pin: NO_PIN
 
 
