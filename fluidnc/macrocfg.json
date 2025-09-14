@@ -1,0 +1,37 @@
+[
+ {
+  "name": "X0Y0",
+  "icon": "star",
+  "action": "Machine/X0Y0.nc",
+  "type": "SD",
+  "id": 0
+ },
+ {
+  "name": "PR Back",
+  "icon": "star",
+  "action": "Machine/PROBE_BACK.nc",
+  "type": "SD",
+  "id": 1
+ },
+ {
+  "name": "PR Front",
+  "icon": "star",
+  "action": "Machine/PROBE_FRONT.nc",
+  "type": "SD",
+  "id": 2
+ },
+ {
+  "name": "PR Left",
+  "icon": "star",
+  "action": "Machine/PROBE_LEFT.nc",
+  "type": "SD",
+  "id": 3
+ },
+ {
+  "name": "PR Right",
+  "icon": "star",
+  "action": "Machine/PROBE_RIGHT.nc",
+  "type": "SD",
+  "id": 4
+ }
+]

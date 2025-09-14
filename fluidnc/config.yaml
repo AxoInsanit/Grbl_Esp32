@@ -10,11 +10,11 @@ axes:
   shared_stepper_disable_pin: NO_PIN
   homing_runs: 2
   x:
-    steps_per_mm: 800.000
+    steps_per_mm: 1600.000
     max_rate_mm_per_min: 2000.000
     acceleration_mm_per_sec2: 150.000
     max_travel_mm: 285.000
-    #soft_limits: true
+    soft_limits: true
     homing:
       cycle: 2
       mpos_mm: 0
@@ -27,20 +27,20 @@ axes:
     motor0:
       limit_neg_pin: NO_PIN
       limit_pos_pin: NO_PIN
-      limit_all_pin: gpio.33:low
+      limit_all_pin: gpio.35:low
       pulloff_mm: 1.000
-      #hard_limits: true
+      hard_limits: true
       stepstick:
         disable_pin: I2SO.0
         step_pin: I2SO.2
         direction_pin: I2SO.1
         ms3_pin: I2SO.3:high        
   y:
-    steps_per_mm: 800.000
+    steps_per_mm: 1600.000
     max_rate_mm_per_min: 2000.000
     acceleration_mm_per_sec2: 150.000
     max_travel_mm: 290.000
-    #soft_limits: true
+    soft_limits: true
     homing:
       cycle: 2
       mpos_mm: 0
@@ -55,18 +55,18 @@ axes:
       limit_pos_pin: NO_PIN
       limit_all_pin: gpio.32:low
       pulloff_mm: 1.000
-      #hard_limits: true
+      hard_limits: true
       stepstick:
         disable_pin: I2SO.7
         step_pin: I2SO.5
-        direction_pin: I2SO.4
+        direction_pin: I2SO.4:low
         ms3_pin: I2SO.6:high
   z:
-    steps_per_mm: 800.000
+    steps_per_mm: 1600.000
     max_rate_mm_per_min: 2000.000
     acceleration_mm_per_sec2: 150.000
     max_travel_mm: 68.000
-    #soft_limits: true
+    soft_limits: true
     homing:
       cycle: 1
       positive_direction: true
@@ -79,8 +79,8 @@ axes:
     motor0:
       limit_neg_pin: NO_PIN
       limit_pos_pin: NO_PIN
-      limit_all_pin: gpio.35:low
-      #hard_limits: true
+      limit_all_pin: gpio.33:low
+      hard_limits: true
       pulloff_mm: 1.000
       stepstick:
         disable_pin: I2SO.8
@@ -186,10 +186,11 @@ sdcard:
   card_detect_pin: NO_PIN
   cs_pin: gpio.5
 
-
+junction_deviation_mm: 0.010
+verbose_errors: true
 start:
-  must_home: false
-
+  check_limits: true
+  must_home: true
 
 # # Begin OLED
 # i2c0:
