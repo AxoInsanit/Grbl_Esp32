@@ -242,7 +242,7 @@ H100:
   uart_num: 2
   modbus_id: 1
   tool_num: 0
-  #speed_map: 0=0% 0=25% 6000=25% 24000=100%
+  speed_map: 0=0% 0=25% 6000=25% 24000=100%
   off_on_alarm: true
 
 coolant:
