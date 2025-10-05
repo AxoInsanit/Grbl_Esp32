@@ -256,6 +256,7 @@ probe:
   toolsetter_pin: NO_PIN
   check_mode_start: true
   hard_stop: false
+  probe_hard_limit: true
 
 control:
   safety_door_pin: NO_PIN
