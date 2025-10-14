@@ -244,6 +244,7 @@ H100:
   tool_num: 0
   speed_map: 0=0% 0=25% 6000=25% 24000=100%
   off_on_alarm: true
+  #debug: 3
 
 coolant:
   flood_pin: I2SO.23
