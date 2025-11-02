@@ -7,8 +7,11 @@ G0 G54 G17 G21 G90 G94
 #<fast_rate>=160
 #<slow_rate>=40
 #<probe_dist>=40
-#<probe_offset>=0.9335
+#<probe_offset>=0.9404
 #<retract_dist>=2
+
+(print, probing)
+M0
 
 G38.2 G91 Y[#<probe_dist>] F#<fast_rate> ; probe fast
 G0 Y-2  ; retract a little

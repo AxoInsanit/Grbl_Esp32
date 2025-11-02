@@ -5,9 +5,9 @@ G0 G54 G17 G21 G90 G94
 
 ; set Probing parameters
 #<fast_rate>=160
-#<slow_rate>=40
+#<slow_rate>=30
 #<probe_dist>=10
-#<probe_offset>=0.01
+#<probe_offset>=0.0194
 #<retract_height>=1
 ;Coordinates of a G38 probe result (X, Y, Z, A, B, C, U, V & W).
 ;5061 X
