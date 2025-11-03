@@ -245,6 +245,7 @@ H100:
   speed_map: 0=0% 0=25% 6000=25% 24000=100%
   off_on_alarm: true
   #debug: 3
+  atc: atc_manual
 
 coolant:
   flood_pin: I2SO.23
@@ -253,8 +254,8 @@ coolant:
 
 probe:
   pin: gpio.2:low:pu
-  #toolsetter_pin: gpio.26:low:pu
-  toolsetter_pin: NO_PIN
+  toolsetter_pin: gpio.26:high:pu
+  #toolsetter_pin: NO_PIN
   check_mode_start: true
   hard_stop: false
   probe_hard_limit: true
@@ -272,6 +273,14 @@ control:
   fault_pin: NO_PIN
   estop_pin: gpio.34:low
   homing_button_pin: NO_PIN
+
+atc_manual:
+  safe_z_mpos_mm: -1.000000
+  probe_seek_rate_mm_per_min: 160.000000
+  probe_feed_rate_mm_per_min: 40.000000
+  change_mpos_mm: 280.000 -4.200 -1.000000
+  ets_mpos_mm: 220.003 -4.200 -40.000
+  ets_rapid_z_mpos_mm: -1.000000
 
 
 ################################################################################################################################
