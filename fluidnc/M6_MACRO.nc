@@ -81,8 +81,8 @@ o100 elseif [#<_current_tool> EQ 0]; M6T<anything> from T0 is used for a manual 
   M5; turn off spindle
   ;move to change location
     G53G0X[#<change_mpos_mm_x>]Y[#<change_mpos_mm_y>]Z[#<change_mpos_mm_z>]
-    G4P0 0.1
-    G43.1Z0
+    G4P0 0.1; execute all buffered gcode
+    G43.1Z0; reset TLO to 0
     (MSG : Install tool #<_selected_tool>)
     ;#<_prev_tool> = #<_selected_tool>
   M61Q[#<_selected_tool>]
@@ -113,7 +113,7 @@ o100 else; M6T<anything> from not T0
 
   ;move to change location
   G53G0X[#<change_mpos_mm_x>]Y[#<change_mpos_mm_y>]Z[#<change_mpos_mm_z>]
-  G4P0 0.1
+  G4P0 0.1; execute all buffered gcode
   (MSG: Install tool #<_selected_tool> then resume to continue)
   M0
   ;probe the new tool
