@@ -40,6 +40,11 @@
 #<ets_mpos_mm_x> = 220.003
 #<ets_mpos_mm_y> = -4.200
 #<ets_mpos_mm_z> = -40.000
+#<static_block_mpos_mm_x> = 148.599
+#<static_block_mpos_mm_y> = -210.103
+#<static_block_mpos_mm_z> = -60.000
+#<static_block_rapid_z_mpos_mm> = -1.000
+#<static_block_ets_offset_mm> = 22.222 ;+6
 
 (print, _current_tool is #<_current_tool>, _selected_tool is #<_selected_tool>)
 ;save modal state
@@ -101,21 +106,23 @@ o100 else
     G53G0Z[#<safe_z_mpos_mm>]
   M5; turn off spindle
   o200 if[#<_have_tool_setter_offset> EQ 0]
-     ;if we have not determined the tool setter offset yet, we need to do that.
-     (print, _have_tool_setter_offset == 0)
-     ;move over toolsetter
-       G53G0Z[#<safe_z_mpos_mm>]; move to safe z
-       G53G0X[#<ets_mpos_mm_x>]Y[#<ets_mpos_mm_y>]; move over toolsetter
-     ;ets probe
-       G53G0Z[#<ets_rapid_z_mpos_mm>]; rapid down
-       G53 G38.2 Z[#<ets_mpos_mm_z>] F[#<probe_seek_rate_mm_per_min>]; seek
-       G53G0Z[#<_abs_z> + 5]; retract before next probe
-       G53 G38.2 Z[#<ets_mpos_mm_z>] F[#<probe_feed_rate_mm_per_min>]; do the feed rate probe
-     #<_ets_tool1_z> = [#5063] ;save the value of the tool1 ETS Z
-     #<_have_tool_setter_offset> = 1;
-     ;move to safe z
-       G53G0Z[#<safe_z_mpos_mm>]
-
+      ;new logic, if we have not determined the tool setter offset yet, we need to do that.
+      (print, _have_tool_setter_offset == 0)
+      ;go to fixed heigh position
+        G53G0Z[#<safe_z_mpos_mm>]; move to safe z
+        G53G0X[#<static_block_mpos_mm_x>]Y[#<static_block_mpos_mm_y>]; move over static block
+        G4P0 0.1; execute all buffered gcode
+        (print, Make sure the probe is in the spindle then resume to continue)
+        M0; confirm the probe is there (G4/M0)
+        ;static block probe
+        G53G0Z[#<static_block_rapid_z_mpos_mm>]; rapid down
+        G53 G38.2 Z[#<static_block_mpos_mm_z>] F[#<probe_seek_rate_mm_per_min>]; seek
+        G53G0Z[#<_abs_z> + 5]; retract before next probe
+        G53 G38.2 Z[#<static_block_mpos_mm_z>] F[#<probe_feed_rate_mm_per_min>]; do the feed rate probe
+        #<_ets_tool1_z> = [#5063+#<static_block_ets_offset_mm>]  ;save the value of the tool1 ETS Z
+        (print, _ets_tool1_z = #<_ets_tool1_z>, 5063= #5063, static_block_ets_offset_mm = #<static_block_ets_offset_mm> )
+        #<_have_tool_setter_offset> = 1;
+        G53G0Z[#<safe_z_mpos_mm>];move to safe z
   o200 endif
 
   ;move to change location
@@ -132,7 +139,8 @@ o100 else
        G53 G38.2 Z[#<ets_mpos_mm_z>] F[#<probe_seek_rate_mm_per_min>]; seek
        G53G0Z[#<_abs_z> + 5]; retract before next probe
        G53 G38.2 Z[#<ets_mpos_mm_z>] F[#<probe_feed_rate_mm_per_min>]; do the feed rate probe
-  #<my_tlo_z > = [#5063 - #<_ets_tool1_z>]; TLO is simply the difference between the tool1 probe and the new tool probe.
+  #<my_tlo_z> = [#5063 - #<_ets_tool1_z>]; TLO is simply the difference between the tool1 probe and the new tool probe.
+  (print, new TLO= #<my_tlo_z >)
   G43.1Z#<my_tlo_z>
   ;move to safe z
     G53G0Z[#<safe_z_mpos_mm>]
@@ -144,7 +152,7 @@ o100 else
   ;M#<initial_spindle_m> ; set spindle to initial state
 o100 endif
 
-(print, EOF: initial_units=#<initial_units>)
+(print, EOF: initial_units=%d#<initial_units>)
 
 ;restore modal state
 G[20+#<initial_units>]; restore G20/G21

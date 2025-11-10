@@ -63,7 +63,7 @@ axes:
         ms3_pin: I2SO.6:high
   z:
     steps_per_mm: 1600.000
-    max_rate_mm_per_min: 2000.000
+    max_rate_mm_per_min: 1000.000
     acceleration_mm_per_sec2: 150.000
     max_travel_mm: 68.000
     soft_limits: true
