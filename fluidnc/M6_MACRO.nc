@@ -31,20 +31,21 @@
 ;  (print,foo is #<foo>, bar is %d#<bar>, fooint is %d#<foo>, bar2 is %.2f#<bar>, foo4 is %f#<foo>)
 
 #<safe_z_mpos_mm> = -1.000
+#<retract_mm> = 2.000
 #<ets_rapid_z_mpos_mm> = -1.000
 #<probe_seek_rate_mm_per_min> = 150.000
 #<probe_feed_rate_mm_per_min> = 40.000
 #<change_mpos_mm_x> = 280.000
-#<change_mpos_mm_y> = -4.200
+#<change_mpos_mm_y> = -13.044
 #<change_mpos_mm_z> = -1.000
-#<ets_mpos_mm_x> = 220.003
-#<ets_mpos_mm_y> = -4.200
-#<ets_mpos_mm_z> = -40.000
-#<static_block_mpos_mm_x> = 148.599
-#<static_block_mpos_mm_y> = -210.103
-#<static_block_mpos_mm_z> = -60.000
+#<ets_mpos_mm_x> = 225.956
+#<ets_mpos_mm_y> = -13.044
+#<ets_mpos_mm_z> = -50.000
+#<static_block_mpos_mm_x> = 192.759
+#<static_block_mpos_mm_y> = -13.044
+#<static_block_mpos_mm_z> = -35.300
 #<static_block_rapid_z_mpos_mm> = -1.000
-#<static_block_ets_offset_mm> = 22.222 ;+6
+#<static_block_ets_offset_mm> = 18.183; 18.222 ;-0.039 -0.196
 
 (print, _current_tool is #<_current_tool>, _selected_tool is #<_selected_tool>)
 ;save modal state
@@ -117,7 +118,7 @@ o100 else
         ;static block probe
         G53G0Z[#<static_block_rapid_z_mpos_mm>]; rapid down
         G53 G38.2 Z[#<static_block_mpos_mm_z>] F[#<probe_seek_rate_mm_per_min>]; seek
-        G53G0Z[#<_abs_z> + 5]; retract before next probe
+        G53G0Z[#<_abs_z> + #<retract_mm>]; retract before next probe
         G53 G38.2 Z[#<static_block_mpos_mm_z>] F[#<probe_feed_rate_mm_per_min>]; do the feed rate probe
         #<_ets_tool1_z> = [#5063+#<static_block_ets_offset_mm>]  ;save the value of the tool1 ETS Z
         (print, _ets_tool1_z = #<_ets_tool1_z>, 5063= #5063, static_block_ets_offset_mm = #<static_block_ets_offset_mm> )
@@ -137,7 +138,7 @@ o100 else
   ;ets probe
        G53G0Z[#<ets_rapid_z_mpos_mm>]; rapid down
        G53 G38.2 Z[#<ets_mpos_mm_z>] F[#<probe_seek_rate_mm_per_min>]; seek
-       G53G0Z[#<_abs_z> + 5]; retract before next probe
+       G53G0Z[#<_abs_z> + #<retract_mm>]; retract before next probe
        G53 G38.2 Z[#<ets_mpos_mm_z>] F[#<probe_feed_rate_mm_per_min>]; do the feed rate probe
   #<my_tlo_z> = [#5063 - #<_ets_tool1_z>]; TLO is simply the difference between the tool1 probe and the new tool probe.
   (print, new TLO= #<my_tlo_z >)
