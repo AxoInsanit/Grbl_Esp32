@@ -41,18 +41,19 @@
 #<ets_mpos_mm_x> = 225.956
 #<ets_mpos_mm_y> = -13.044
 #<ets_mpos_mm_z> = -50.000
-#<static_block_mpos_mm_x> = 192.759
+#<static_block_mpos_mm_x> = 190.759
 #<static_block_mpos_mm_y> = -13.044
 #<static_block_mpos_mm_z> = -35.300
-#<static_block_rapid_z_mpos_mm> = -1.000
-#<static_block_ets_offset_mm> = 18.183; 18.222 ;-0.039 -0.196
+#<static_block_rapid_z_mpos_mm> = -19.000
+#<static_block_ets_offset_mm> = 18.165;
 
-(print, _current_tool is #<_current_tool>, _selected_tool is #<_selected_tool>)
+(print, _current_tool is #<_current_tool> _selected_tool is #<_selected_tool>)
 ;save modal state
 #<initial_units> = #<_metric>; G20/G21
 
 ;save spindle state
 #<initial_spindle_m> = #<_spindle_m>
+(print, initial_spindle_m is #<initial_spindle_m>)
 
 ;global vars set
 o10 if [EXISTS[#<_have_tool_setter_offset>] EQ 0]
@@ -70,7 +71,7 @@ G21 ; use metric for this macro
 o100 if [#<_plane> NE 170]
   (print, Only G17 is supported by this macro)
   $Send/Alarm=3; (Abort during cycle)
-o100 elseif [#<_selected_tool> EQ 0.000000]
+o100 elseif [#<_selected_tool> EQ 0]
  (print, M6T0 reset ATC)
  ;move to safe z
    G53G0Z[#<safe_z_mpos_mm>]
@@ -78,7 +79,6 @@ o100 elseif [#<_selected_tool> EQ 0.000000]
  ;move to change location
    G53G0X[#<change_mpos_mm_x>]Y[#<change_mpos_mm_y>]Z[#<change_mpos_mm_z>]
  ;reset
-   ;#<_prev_tool> = 0;
    #<_have_tool_setter_offset> = 0;
    M61Q[#<_selected_tool>]
    G43.1Z0 ;reset the TLO to 0
@@ -94,7 +94,6 @@ o100 elseif [#<_current_tool> EQ 0]
     G4P0 0.1; execute all buffered gcode
     G43.1Z0; reset TLO to 0
     (print, Install tool #<_selected_tool>)
-    ;#<_prev_tool> = #<_selected_tool>
   M61Q[#<_selected_tool>]
 o100 else
  ;M6T<anything> from not T0
