@@ -40,10 +40,10 @@
 #<change_mpos_mm_z> = -1.000
 #<ets_mpos_mm_x> = 225.956
 #<ets_mpos_mm_y> = -13.044
-#<ets_mpos_mm_z> = -50.000
+#<ets_mpos_mm_z> = -56.000
 #<static_block_mpos_mm_x> = 190.759
 #<static_block_mpos_mm_y> = -13.044
-#<static_block_mpos_mm_z> = -35.300
+#<static_block_mpos_mm_z> = -36.920
 #<static_block_rapid_z_mpos_mm> = -19.000
 #<static_block_ets_offset_mm> = 18.165;
 
