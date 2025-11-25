@@ -3,19 +3,13 @@
 ; reset modal state
 G0 G54 G17 G21 G90 G94
 
-; set Probing parameters
-#<fast_rate>=160
-#<slow_rate>=30
-#<probe_offset>=0.0194
-
-
 ; Circle Center Finding Macro
 ; 1: Move the probe inside the circle
 ; 2: Start the macro
 ; Macro will probe in three directions to find an edge to the circle
 ; If successful the probe will move to the center of the circle
 ; Any failures will terminate the macro
-#<probe_dist>=10.0   ; Distance the probe will move in each direction before failing
+#<probe_dist>=30.0   ; Distance the probe will move in each direction before failing
 #<probe_feed>=40  ; Speed at which it probes.
 
 ; the directions it will probe from the starting point
