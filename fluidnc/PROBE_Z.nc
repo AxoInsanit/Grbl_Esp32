@@ -14,7 +14,7 @@ G0 G54 G17 G21 G90 G94
 ;5062 Y
 ;5063 Z
 
-(print,Z probing)
+(print, Z Probing: Make sure the probe is in the spindle then resume to continue)
 M0
 
 G38.2 G91 Z[-#<probe_dist>] F#<fast_rate> ; probe fast
