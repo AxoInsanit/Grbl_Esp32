@@ -149,7 +149,7 @@ o100 else
   G53G0Z#<start_z>
   ;#<_prev_tool> = #<_selected_tool>
   M61Q[#<_selected_tool>]; tool change sucessful
-  ;M#<initial_spindle_m> ; set spindle to initial state
+  M#<initial_spindle_m> ; set spindle to initial state
 o100 endif
 
 (print, EOF: initial_units=%d#<initial_units>)
